@@ -30,7 +30,7 @@
 namespace logging
 {
 
-static Logger *Logger::ROOT = new Logger(nullptr, "root", Level::debug);
+static Logger *Logger::root = new Logger(nullptr, "root", Level::debug);
 
 static char Logger::buffer[Logger::buffer_size];
 
@@ -39,12 +39,12 @@ static int Logger::pos = 0;
 static LogBuffer Logger::stream;
 
 Logger::Logger (const String name) :
-        Logger(Logger::ROOT, name, Level::info)
+        Logger(Logger::root, name, Level::info)
 {
 }
 
 Logger::Logger (const String name, const Level level) :
-        Logger(Logger::ROOT, name, level)
+        Logger(Logger::root, name, level)
 {
 }
 

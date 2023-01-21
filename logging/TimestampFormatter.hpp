@@ -25,17 +25,22 @@
 
 #include "Logger.hpp"
 #include "Formatter.hpp"
+#include "TimeSource.hpp"
 
 namespace logging
 {
 
-class StandardFormatter: public Formatter
+class TimestampFormatter: public Formatter
 {
     public:
-        StandardFormatter ();
-        virtual ~StandardFormatter () = default;
+        TimestampFormatter (TimeSource &time_source);
+        virtual ~TimestampFormatter () = default;
         virtual void format (char *buffer, const size_t buffer_size, const Logger *const logger, const Level level,
                 const int line, const char *const message);
+
+    private:
+        TimeSource &time_source;
 };
 
 }
+

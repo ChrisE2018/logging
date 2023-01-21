@@ -45,7 +45,7 @@ class Logger
         friend LogBuffer;
 
     public:
-        static Logger *ROOT;
+        static Logger *root;
         Logger (const String name);
         Logger (const String name, const Level level);
         Logger (Logger *parent, const String name, const Level level);
