@@ -23,6 +23,7 @@
 
 #pragma once
 
+#include <stddef.h>
 #include "Logger.hpp"
 #include "Formatter.hpp"
 

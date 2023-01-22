@@ -21,6 +21,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include <stdio.h>
 #include "StandardFormatter.hpp"
 
 namespace logging
@@ -34,8 +35,11 @@ StandardFormatter::StandardFormatter () :
 void StandardFormatter::format (char *buffer, const size_t buffer_size, const Logger *const logger, const Level level,
         const int line, const char *const message)
 {
-    const int ms = millis() % 1000;
-    snprintf(buffer, buffer_size, "%03d [%s %s:%d] %s", ms, stringify(level), logger->get_short_name().c_str(), line, message);
+    const unsigned long now = millis();
+    const unsigned long seconds = now / 1000;
+    const int ms = now % 1000;
+    snprintf(buffer, buffer_size, "%lu.%03d [%s %s:%d] %s", seconds, ms, stringify(level),
+            logger->get_short_name().c_str(), line, message);
     buffer[buffer_size - 1] = '\0';
 }
 
