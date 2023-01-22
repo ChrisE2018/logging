@@ -30,7 +30,7 @@ TimeSource::TimeSource ()
 {
 }
 
-time_t TimeSource::get_unixtime ()
+time_t TimeSource::unixtime ()
 {
     return 0;
 }

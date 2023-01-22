@@ -71,7 +71,7 @@ void SdAppender::open_logfile ()
 
 void SdAppender::set_log_pathname ()
 {
-    const time_t t = time_source.get_unixtime();
+    const time_t t = time_source.unixtime();
     struct tm *const lt = localtime(&t);
     const int size = snprintf(log_filename, filename_size, "LOGS/Y%4d/M%02d/D%02d/", 1900 + lt->tm_year, lt->tm_mon + 1,
             lt->tm_mday);
@@ -109,7 +109,7 @@ bool SdAppender::log_data (String folder, String filename, const char *message)
         Serial.print(F("Opened "));
         Serial.println(buf);
 
-        const time_t t = time_source.get_unixtime();
+        const time_t t = time_source.unixtime();
         struct tm *const lt = localtime(&t);
         const int ms = millis() % 1000;
         const int n = snprintf(buf, buf_size, "%s.%03d ", isotime(lt), ms);

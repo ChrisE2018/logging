@@ -34,7 +34,7 @@ class TimeSource
         TimeSource ();
         virtual ~TimeSource () = default;
 
-        virtual time_t get_unixtime ();
+        virtual time_t unixtime ();
 };
 
 }

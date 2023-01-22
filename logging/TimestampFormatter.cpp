@@ -35,7 +35,7 @@ TimestampFormatter::TimestampFormatter (TimeSource &time_source) :
 void TimestampFormatter::format (char *buffer, const size_t buffer_size, const Logger *const logger, const Level level,
         const int line, const char *const message)
 {
-    const time_t t = time_source.get_unixtime();
+    const time_t t = time_source.unixtime();
     struct tm *const lt = localtime(&t);
     const int ms = millis() % 1000;
     snprintf(buffer, buffer_size, "%s.%03d [%s %s:%d] %s", isotime(lt), ms, stringify(level),
