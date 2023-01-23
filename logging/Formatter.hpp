@@ -23,8 +23,19 @@
 
 #pragma once
 
-#include "Appender.hpp"
-#include "Formatter.hpp"
-#include "Logger.hpp"
-#include "SerialAppender.hpp"
-#include "StandardFormatter.hpp"
+#include "Level.hpp"
+
+namespace logging
+{
+class Logger;
+
+class Formatter
+{
+    public:
+        Formatter ();
+        virtual ~Formatter () = default;
+        virtual void format (char *buffer, const size_t buffer_size, const Logger *const logger, const Level level,
+                const int line, const char *const message);
+};
+
+}

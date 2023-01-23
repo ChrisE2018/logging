@@ -21,10 +21,22 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#pragma once
-
-#include "Appender.hpp"
-#include "Formatter.hpp"
-#include "Logger.hpp"
 #include "SerialAppender.hpp"
-#include "StandardFormatter.hpp"
+
+namespace logging
+{
+
+SerialAppender::SerialAppender (Print &serial, const Level level, Formatter &formatter) :
+        Appender(level, formatter), serial(serial)
+{
+}
+
+void SerialAppender::append (const Level _level, const char *message)
+{
+    if (static_cast<int>(_level) <= static_cast<int>(level))
+    {
+        serial.println(message);
+    }
+}
+
+}

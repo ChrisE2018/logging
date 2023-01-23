@@ -21,10 +21,18 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#pragma once
+#include "TimeSource.hpp"
 
-#include "Appender.hpp"
-#include "Formatter.hpp"
-#include "Logger.hpp"
-#include "SerialAppender.hpp"
-#include "StandardFormatter.hpp"
+namespace logging
+{
+
+TimeSource::TimeSource ()
+{
+}
+
+time_t TimeSource::unixtime ()
+{
+    return 0;
+}
+
+}

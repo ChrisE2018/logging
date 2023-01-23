@@ -21,10 +21,30 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#pragma once
+#include "Level.hpp"
 
-#include "Appender.hpp"
-#include "Formatter.hpp"
-#include "Logger.hpp"
-#include "SerialAppender.hpp"
-#include "StandardFormatter.hpp"
+namespace logging
+{
+
+const char* stringify (const Level level)
+{
+    switch (level)
+    {
+        case Level::error:
+            return "error";
+        case Level::warning:
+            return "warning";
+        case Level::info:
+            return "info";
+        case Level::debug:
+            return "debug";
+        case Level::data:
+            return "data";
+        case Level::none:
+            return "none";
+        default:
+            return "?level?";
+    }
+}
+
+}

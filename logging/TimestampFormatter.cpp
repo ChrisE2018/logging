@@ -21,10 +21,26 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#pragma once
+#include <stdio.h>
+#include "TimestampFormatter.hpp"
 
-#include "Appender.hpp"
-#include "Formatter.hpp"
-#include "Logger.hpp"
-#include "SerialAppender.hpp"
-#include "StandardFormatter.hpp"
+namespace logging
+{
+
+TimestampFormatter::TimestampFormatter (TimeSource &time_source) :
+        Formatter(), time_source(time_source)
+{
+}
+
+void TimestampFormatter::format (char *buffer, const size_t buffer_size, const Logger *const logger, const Level level,
+        const int line, const char *const message)
+{
+    const time_t t = time_source.unixtime();
+    struct tm *const lt = localtime(&t);
+    const int ms = millis() % 1000;
+    snprintf(buffer, buffer_size, "%s.%03d [%s %s:%d] %s", isotime(lt), ms, stringify(level),
+            logger->get_short_name().c_str(), line, message);
+    buffer[buffer_size - 1] = '\0';
+}
+
+}

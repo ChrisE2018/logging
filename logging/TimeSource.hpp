@@ -23,8 +23,18 @@
 
 #pragma once
 
-#include "Appender.hpp"
-#include "Formatter.hpp"
-#include "Logger.hpp"
-#include "SerialAppender.hpp"
-#include "StandardFormatter.hpp"
+#include <time.h>
+
+namespace logging
+{
+
+class TimeSource
+{
+    public:
+        TimeSource ();
+        virtual ~TimeSource () = default;
+
+        virtual time_t unixtime ();
+};
+
+}

@@ -24,7 +24,19 @@
 #pragma once
 
 #include "Appender.hpp"
-#include "Formatter.hpp"
-#include "Logger.hpp"
-#include "SerialAppender.hpp"
-#include "StandardFormatter.hpp"
+
+namespace logging
+{
+
+class SerialAppender: public Appender
+{
+    public:
+        SerialAppender (Print &serial, const Level level, Formatter &formatter);
+        virtual ~SerialAppender () = default;
+        virtual void append (const Level level, const char *message) override;
+
+    private:
+        Print &serial;
+};
+
+}

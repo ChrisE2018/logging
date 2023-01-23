@@ -21,10 +21,21 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#pragma once
-
-#include "Appender.hpp"
+#include <string.h>
 #include "Formatter.hpp"
 #include "Logger.hpp"
-#include "SerialAppender.hpp"
-#include "StandardFormatter.hpp"
+
+namespace logging
+{
+
+Formatter::Formatter ()
+{
+}
+
+void Formatter::format (char *buffer, const size_t buffer_size, const Logger *const logger, const Level level,
+        const int line, const char *const message)
+{
+    strlcpy(buffer, message, buffer_size);
+}
+
+}

@@ -23,8 +23,4 @@
 
 #pragma once
 
-#include "Appender.hpp"
-#include "Formatter.hpp"
 #include "Logger.hpp"
-#include "SerialAppender.hpp"
-#include "StandardFormatter.hpp"

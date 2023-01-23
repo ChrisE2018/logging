@@ -23,8 +23,29 @@
 
 #pragma once
 
-#include "Appender.hpp"
-#include "Formatter.hpp"
 #include "Logger.hpp"
-#include "SerialAppender.hpp"
-#include "StandardFormatter.hpp"
+#include "Formatter.hpp"
+
+namespace logging
+{
+
+class Appender
+{
+    public:
+        Appender (const Level level, Formatter &formatter);
+        virtual ~Appender () = default;
+        Level get_level () const;
+        void set_level (const Level level);
+        virtual void append (const Logger *logger, const Level level, const int line, const char *message);
+        virtual void append (const Level level, const char *message);
+
+    protected:
+        Level level;
+        static const int buffer_size = 128;
+        char buffer[buffer_size];
+
+    private:
+        Formatter &formatter;
+};
+
+}
