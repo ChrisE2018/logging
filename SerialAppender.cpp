@@ -33,7 +33,7 @@ SerialAppender::SerialAppender (Print &serial, const Level level, Formatter &for
 
 void SerialAppender::append (const Level _level, const char *message)
 {
-    if (static_cast<int>(_level) <= static_cast<int>(level))
+    if (_level <= level)
     {
         serial.println(message);
     }

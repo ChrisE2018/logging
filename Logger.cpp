@@ -151,7 +151,7 @@ LogBuffer& Logger::debug (const int line)
 
 void Logger::logging (const Level _level, const int line, const char *format, ...)
 {
-    if (static_cast<int>(_level) <= static_cast<int>(level))
+    if (_level <= level)
     {
         va_list args;
         va_start(args, format);
@@ -163,7 +163,7 @@ void Logger::logging (const Level _level, const int line, const char *format, ..
 
 void Logger::logging_p (const Level _level, const int line, const char *format, ...)
 {
-    if (static_cast<int>(_level) <= static_cast<int>(level))
+    if (_level <= level)
     {
         va_list args;
         va_start(args, format);

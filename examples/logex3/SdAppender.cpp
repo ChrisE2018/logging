@@ -33,7 +33,7 @@ SdAppender::SdAppender (const int chip_select, const Level level, Formatter &for
 
 void SdAppender::append (const Level _level, const char *const message)
 {
-    if (static_cast<int>(_level) <= static_cast<int>(level))
+    if (_level <= level)
     {
         if (log_file)
         {
