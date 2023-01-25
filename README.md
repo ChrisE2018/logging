@@ -9,7 +9,7 @@ within the limitations of the Arduino platform.
 
 ```
 logging::StandardFormatter;
-logging::SerialAppender appender(Serial, logging::Level::info, formatter);
+logging::SerialAppender appender(Serial, logging::Level::info, &formatter);
 logging::Logger::ROOT->add_appender(&appender);
 ```
 
@@ -28,9 +28,14 @@ You can attach multiple appenders to any logger to send output to several
 places. I have a bluetooth card attached to `Serial3` so I define a
 `SerialAppender` for `Serial` (usb) and `Serial3` (bluetooth) so log output
 goes to my phone or the host computer or both. An `SdAppender` sends
-log output to files on the microSD card on pin 53. My clock card works
+log output to files on the `microSD` card on pin 53. My clock card works
 as a `TimeSource` to supply unix time to a `TimestampFormatter` so everything
-has date and time.
+has date and time. You will need to install a clock card and include
+the `DS3231` library for `TimestampFormatter` to work.
+
+The `SdAppender` sends output to files on a `microSD` card. You will need to include
+extra libraries for this to work: `SD`, `SPI` and `Wire`. The `SD` library defines
+a 500 byte buffer so this appender increases the sram usage significantly.
 
 Normally all the appenders are attached to the `root` logger which is 
 the parent of all other loggers. However, there is nothing special about the 
