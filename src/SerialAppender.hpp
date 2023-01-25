@@ -23,6 +23,7 @@
 
 #pragma once
 
+#include <Print.h>
 #include "Appender.hpp"
 
 namespace logging

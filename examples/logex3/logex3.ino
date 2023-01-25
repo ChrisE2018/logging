@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <ArduinoSTL.h>
 #include <DS3231.h>
 #include <ctime>
 #include <Wire.h>
@@ -6,6 +7,7 @@
 #include "Logger.hpp"
 #include "StandardFormatter.hpp"
 #include "TimestampFormatter.hpp"
+#include "SdAppender.hpp"
 #include "SerialAppender.hpp"
 #include "TimeSource.hpp"
 
@@ -28,19 +30,19 @@ class Clock: public logging::TimeSource
         DS3231 clock;
 };
 
-Clock drwho;
-
 static logging::Logger logger(__FILE__, logging::Level::info);
-logging::TimestampFormatter formatter(&drwho);
-logging::SerialAppender appender(Serial, logging::Level::info, &formatter);
 
 void setup ()
 {
-    Serial.begin(9600);
+    Serial.begin(115200);
     Serial.println(F("Logging example three"));
-    logging::Logger::root->add_appender(&appender);
-
-    drwho.setup();
+    Clock *drwho = new Clock();
+    drwho->setup();
+    logging::TimestampFormatter *formatter = new logging::TimestampFormatter(drwho);
+    logging::SerialAppender *serial_appender = new logging::SerialAppender(Serial, logging::Level::info, formatter);
+    logging::SdAppender *sd_appender = new logging::SdAppender(53, logging::Level::info, formatter, drwho);
+    logging::Logger::root->add_appender(serial_appender);
+    logging::Logger::root->add_appender(sd_appender);
 }
 
 void loop ()

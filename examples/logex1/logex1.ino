@@ -1,4 +1,5 @@
-#include "Arduino.h"
+#include <ArduinoSTL.h>
+#include <Arduino.h>
 
 #include "Logger.hpp"
 #include "StandardFormatter.hpp"
@@ -6,7 +7,7 @@
 
 static logging::Logger logger(__FILE__, logging::Level::info);
 logging::StandardFormatter formatter;
-logging::SerialAppender appender(Serial, logging::Level::info, formatter);
+logging::SerialAppender appender(Serial, logging::Level::info, &formatter);
 
 void setup ()
 {
