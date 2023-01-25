@@ -31,7 +31,7 @@ namespace logging
 class SerialAppender: public Appender
 {
     public:
-        SerialAppender (Print &serial, const Level level, Formatter const *formatter);
+        SerialAppender (Print &serial, const Level level, Formatter *const formatter);
         virtual ~SerialAppender () = default;
         virtual void append (const Level level, const char *message) override;
 

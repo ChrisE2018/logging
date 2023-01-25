@@ -30,13 +30,13 @@
 namespace logging
 {
 
-static Logger *Logger::root = new Logger(nullptr, "root", Level::debug);
+Logger *Logger::root = new Logger(nullptr, "root", Level::debug);
 
-static char Logger::buffer[Logger::buffer_size];
+char Logger::buffer[Logger::buffer_size];
 
-static int Logger::pos = 0;
+int Logger::pos = 0;
 
-static LogBuffer Logger::stream;
+LogBuffer Logger::stream;
 
 Logger::Logger (const String name) :
         Logger(Logger::root, name, Level::info)
@@ -65,7 +65,7 @@ String Logger::get_short_name () const
 
 String Logger::shorten (const String name)
 {
-    const String &filename = name;
+    String filename = name;
     const int slash_pos = filename.lastIndexOf('/');
     if (slash_pos >= 0)
     {
@@ -167,7 +167,7 @@ void Logger::logging (const Level _level, const int line, const __FlashStringHel
     {
         va_list args;
         va_start(args, format);
-        vsnprintf_P(buffer, buffer_size, (const char *)format, args);
+        vsnprintf_P(buffer, buffer_size, (const char*) format, args);
         va_end(args);
         append(this, _level, line, buffer);
     }
