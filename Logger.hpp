@@ -25,6 +25,7 @@
 
 #include <Arduino.h>
 #include <vector>
+#include "Appender.hpp"
 #include "Level.hpp"
 #include "LogBuffer.hpp"
 
@@ -33,11 +34,11 @@ namespace logging
 
 class Appender;
 
-#define LOG_ERROR(logger, fmt, args...) logger.logging_p(logging::Level::error, __LINE__, (const char *)F(fmt), args);
-#define LOG_WARNING(logger, fmt, args...) logger.logging_p(logging::Level::warning, __LINE__, (const char *)F(fmt), args);
-#define LOG_INFO(logger, fmt, args...) logger.logging_p(logging::Level::info, __LINE__, (const char *)F(fmt), args);
-#define LOG_DEBUG(logger, fmt, args...) logger.logging_p(logging::Level::debug, __LINE__, (const char *)F(fmt), args);
-#define LOG_DATA(logger, fmt, args...) logger.logging_p(logging::Level::data, __LINE__, (const char *)F(fmt), args);
+#define LOG_ERROR(logger, fmt, args...) logger.logging(logging::Level::error, __LINE__, F(fmt), args);
+#define LOG_WARNING(logger, fmt, args...) logger.logging(logging::Level::warning, __LINE__, F(fmt), args);
+#define LOG_INFO(logger, fmt, args...) logger.logging(logging::Level::info, __LINE__, F(fmt), args);
+#define LOG_DEBUG(logger, fmt, args...) logger.logging(logging::Level::debug, __LINE__, F(fmt), args);
+#define LOG_DATA(logger, fmt, args...) logger.logging(logging::Level::data, __LINE__, F(fmt), args);
 
 class Logger
 {
@@ -51,7 +52,7 @@ class Logger
         Logger (Logger *parent, const String name, const Level level);
         const String get_name () const;
         const String get_short_name () const;
-        const Level get_level () const;
+        Level get_level () const;
         void add_appender (Appender *const appender);
         LogBuffer& error ();
         LogBuffer& warning ();
@@ -63,7 +64,7 @@ class Logger
         LogBuffer& info (const int line);
         LogBuffer& debug (const int line);
         void logging (const Level level, const int line, const char *format, ...);
-        void logging_p (const Level level, const int line, const char *format, ...);
+        void logging (const Level level, const int line, const __FlashStringHelper *format, ...);
         void append (const Logger *logger, const Level level, const int line, const char *message);
 
     private:
@@ -80,5 +81,65 @@ class Logger
         std::vector<Appender*> appenders;
         const String shorten (const String name);
 };
+
+//template<typename ... Types>
+//void log_error (Logger logger, const int line, const __FlashStringHelper *format, Types ... args)
+//{
+//    logger.logging(logging::Level::error, line, format, args...);
+//}
+//
+//template<typename ... Types>
+//void log_error (Logger logger, const int line, const char *format, Types ... args)
+//{
+//    logger.logging(logging::Level::error, line, format, args...);
+//}
+//
+//template<typename ... Types>
+//void log_warning (Logger logger, const int line, const __FlashStringHelper *format, Types ... args)
+//{
+//    logger.logging(logging::Level::warning, line, format, args...);
+//}
+//
+//template<typename ... Types>
+//void log_warning (Logger logger, const int line, const char *format, Types ... args)
+//{
+//    logger.logging(logging::Level::warning, line, format, args...);
+//}
+//
+//template<typename ... Types>
+//void log_info (Logger logger, const int line, const __FlashStringHelper *format, Types ... args)
+//{
+//    logger.logging(logging::Level::info, line, format, args...);
+//}
+//
+//template<typename ... Types>
+//void log_info (Logger logger, const int line, const char *format, Types ... args)
+//{
+//    logger.logging(logging::Level::info, line, format, args...);
+//}
+//
+//template<typename ... Types>
+//void log_debug (Logger logger, const int line, const __FlashStringHelper *format, Types ... args)
+//{
+//    logger.logging(logging::Level::debug, line, format, args...);
+//}
+//
+//template<typename ... Types>
+//void log_debug (Logger logger, const int line, const char *format, Types ... args)
+//{
+//    logger.logging(logging::Level::debug, line, format, args...);
+//}
+//
+//template<typename ... Types>
+//void log_data (Logger logger, const int line, const __FlashStringHelper *format, Types ... args)
+//{
+//    logger.logging(logging::Level::data, line, format, args...);
+//}
+//
+//template<typename ... Types>
+//void log_data (Logger logger, const int line, const char *format, Types ... args)
+//{
+//    logger.logging(logging::Level::data, line, format, args...);
+//}
 
 }

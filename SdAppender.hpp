@@ -33,7 +33,7 @@ namespace logging
 class SdAppender: public Appender
 {
     public:
-        SdAppender (const int chip_select, const Level level, Formatter &formatter, TimeSource &time_source);
+        SdAppender (const int chip_select, const Level level, Formatter *const formatter, TimeSource *const time_source);
         virtual ~SdAppender () = default;
         virtual void append (const Level level, const char *const message);
         void open_logfile ();
@@ -43,7 +43,7 @@ class SdAppender: public Appender
         bool save_data (String folder, String filename, const char *message);
 
     private:
-        TimeSource &time_source;
+        TimeSource *const time_source;
 
         // For file access on micro SD card
         int chip_select;

@@ -31,8 +31,8 @@ class Clock: public logging::TimeSource
 Clock drwho;
 
 static logging::Logger logger(__FILE__, logging::Level::info);
-logging::TimestampFormatter formatter(drwho);
-logging::SerialAppender appender(Serial, logging::Level::info, formatter);
+logging::TimestampFormatter formatter(&drwho);
+logging::SerialAppender appender(Serial, logging::Level::info, &formatter);
 
 void setup ()
 {

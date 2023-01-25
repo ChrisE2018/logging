@@ -32,7 +32,7 @@ namespace logging
 class Appender
 {
     public:
-        Appender (const Level level, Formatter &formatter);
+        Appender (const Level level, Formatter *const formatter);
         virtual ~Appender () = default;
         Level get_level () const;
         void set_level (const Level level);
@@ -45,7 +45,7 @@ class Appender
         char buffer[buffer_size];
 
     private:
-        Formatter &formatter;
+        Formatter *const formatter;
 };
 
 }

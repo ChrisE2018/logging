@@ -26,7 +26,7 @@
 namespace logging
 {
 
-SerialAppender::SerialAppender (Print &serial, const Level level, Formatter &formatter) :
+SerialAppender::SerialAppender (Print &serial, const Level level, Formatter const *formatter) :
         Appender(level, formatter), serial(serial)
 {
 }

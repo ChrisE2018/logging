@@ -33,13 +33,13 @@ namespace logging
 class TimestampFormatter: public Formatter
 {
     public:
-        TimestampFormatter (TimeSource &time_source);
+        TimestampFormatter (TimeSource *const time_source);
         virtual ~TimestampFormatter () = default;
         virtual void format (char *buffer, const size_t buffer_size, const Logger *const logger, const Level level,
                 const int line, const char *const message);
 
     private:
-        TimeSource &time_source;
+        TimeSource *const time_source;
 };
 
 }

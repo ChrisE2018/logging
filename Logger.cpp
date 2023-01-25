@@ -79,7 +79,7 @@ const String Logger::shorten (const String name)
     return filename;
 }
 
-const Level Logger::get_level () const
+Level Logger::get_level () const
 {
     return level;
 }
@@ -161,13 +161,13 @@ void Logger::logging (const Level _level, const int line, const char *format, ..
     }
 }
 
-void Logger::logging_p (const Level _level, const int line, const char *format, ...)
+void Logger::logging (const Level _level, const int line, const __FlashStringHelper *format, ...)
 {
     if (_level <= level)
     {
         va_list args;
         va_start(args, format);
-        vsnprintf_P(buffer, buffer_size, format, args);
+        vsnprintf_P(buffer, buffer_size, (const char *)format, args);
         va_end(args);
         append(this, _level, line, buffer);
     }

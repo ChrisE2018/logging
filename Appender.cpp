@@ -26,7 +26,7 @@
 namespace logging
 {
 
-Appender::Appender (const Level level, Formatter &formatter) :
+Appender::Appender (const Level level, Formatter *const formatter) :
         level(level), formatter(formatter)
 {
 }
@@ -43,7 +43,7 @@ void Appender::set_level (const Level _level)
 
 void Appender::append (const Logger *logger, const Level level, const int line, const char *message)
 {
-    formatter.format(buffer, buffer_size, logger, level, line, message);
+    formatter->format(buffer, buffer_size, logger, level, line, message);
     buffer[buffer_size - 1] = '\0';
     append(level, buffer);
 }
