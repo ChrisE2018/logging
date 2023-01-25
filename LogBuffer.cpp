@@ -23,6 +23,8 @@
 
 #include <locale>
 #include <cstdio>
+#include <iostream>
+#include <ostream>
 #include "LogBuffer.hpp"
 #include "Logger.hpp"
 

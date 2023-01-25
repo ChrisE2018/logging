@@ -53,17 +53,17 @@ Logger::Logger (Logger *parent, const String name, const Level level) :
 {
 }
 
-const String Logger::get_name () const
+String Logger::get_name () const
 {
     return name;
 }
 
-const String Logger::get_short_name () const
+String Logger::get_short_name () const
 {
     return short_name;
 }
 
-const String Logger::shorten (const String name)
+String Logger::shorten (const String name)
 {
     const String &filename = name;
     const int slash_pos = filename.lastIndexOf('/');

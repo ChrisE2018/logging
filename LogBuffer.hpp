@@ -24,7 +24,6 @@
 #pragma once
 
 #include <streambuf>
-#include <iostream>
 #include <ostream>
 #include <string>
 #include <WString.h>

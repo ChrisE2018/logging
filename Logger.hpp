@@ -50,8 +50,8 @@ class Logger
         Logger (const String name);
         Logger (const String name, const Level level);
         Logger (Logger *parent, const String name, const Level level);
-        const String get_name () const;
-        const String get_short_name () const;
+        String get_name () const;
+        String get_short_name () const;
         Level get_level () const;
         void add_appender (Appender *const appender);
         LogBuffer& error ();
@@ -79,7 +79,7 @@ class Logger
         const Level level;
 
         std::vector<Appender*> appenders;
-        const String shorten (const String name);
+        String shorten (const String name);
 };
 
 //template<typename ... Types>
