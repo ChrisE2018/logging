@@ -76,3 +76,6 @@ and https://gcc.gnu.org/onlinedocs/libstdc++/manual/streambufs.html.
 
 Jeroen F.J. Laros reviewed the code and provided useful feedback.
 
+The overall concept is based on log4j and log4cxx. Ideas from the Python
+logging library has also been incorporated.
+
