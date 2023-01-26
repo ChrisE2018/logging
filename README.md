@@ -2,8 +2,8 @@
 
 The logging library provides a flexible way to trace execution of Arduino programs.
 I created this library because I could not find another solution that met
-my needs. It is inspired by `log4j` but has been kept simple so it work
-within the limitations of the Arduino platform. 
+my needs. It is inspired by `log4j` but is designed to work within the 
+limitations of the Arduino platform. 
 
 # Basic Configuration
 
@@ -45,7 +45,11 @@ construct loggers with explicit parent loggers or supply `nullptr` to make a new
 is connected to a single `SerialAppender` to avoid the delays associated
 with file logging.
 
-New formatters and appenders are easy to define. Just use the source code
+Configuration can be done in the `setup` function of your sketch. Be sure 
+to allocate objects in the heap rather than the stack, so they 
+won't be deleted when the `setup` function returns.
+
+New formatters and appenders are easy to define. Use the source code
 for examples.
 
 # Future Versions
@@ -56,9 +60,11 @@ improved. If you want to fix something, feel free to open a pull request
 and send me email.
 
 This version does not include any configuration mechanism so you need
-to create and link all the objects manually. It depends on ArduinoSTL
-in very limited ways; it might be good to remove those dependencies
-so this library can be used alone.
+to create and link all the objects manually.
+
+The clock and microSD interfaces are based on the specific hardware I have
+available. If I learn of more standardized interfaces I might incorporate
+those into some future version to be compatible with more hardware varieties.
 
 # Limitations
 
