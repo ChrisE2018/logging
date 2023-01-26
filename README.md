@@ -64,3 +64,15 @@ so this library can be used alone.
 
 Internal buffers are shared to minimize the amount of sram required for
 logging, so it is not re-entrant.
+
+# Credits
+
+Information from many websites has been used in preparation of this library,
+too many to list. 
+
+Implementation of the C++ style stream logging benefited
+from http://www.angelikalanger.com/Articles/C++Report/IOStreamsDerivation/IOStreamsDerivation.html
+and https://gcc.gnu.org/onlinedocs/libstdc++/manual/streambufs.html.
+
+Jeroen F.J. Laros reviewed the code and provided useful feedback.
+
